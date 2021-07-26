@@ -1,0 +1,52 @@
+'''
+the partition algorithm
+
+In the partition logic we will always assume that the last element in the array is the pivot element 
+i will point to 1 position less than the index of the first element(the index we are intrested in)
+the j loop will be traversing from first element to the penultimate element in the array
+the pivot element will be moved to the i+1 position and a[i] will have an element less than or equal to x
+the elements from 1 to i will be less than x. And all the elements greater than x will be in the positions from i+2 onwards
+in the above algorithm the values of x and a[part_ele] are not swapped until the end of the loop
+
+In the Quicksort algorithm
+we first partition the array such that all the elements less than the pivot element are on one side of the list and all the elements greater than the pivot element 
+are on the other side of the list
+we need to call quick sort recursively on these two lists
+'''
+
+
+def Quicksort(arr,first_ele,last_elem):
+    a=len(arr)
+    if a<=1:
+        print('already sorted')
+    else:
+        if first_ele<last_elem:
+            part_postion=partition(arr,first_ele,last_elem)
+            Quicksort(arr,first_ele,part_postion-1)
+            Quicksort(arr,part_postion+1,last_elem)
+            part_postion_element=arr[part_postion]
+            print('the sorting element is',part_postion_element)
+
+def partition(arr,first_ele,part_ele):
+    x=arr[part_ele]
+    print('the pivot element is',x)
+    i=first_ele-1
+    print('the ith index is',i)
+    for j in range(first_ele,part_ele):
+        print('the jth position is',j)
+        if arr[j]<=x:
+            i=i+1
+            print('the ith position is',i)
+            print('the ith element',arr[i])
+            print('the jth element',arr[j])
+            arr[i],arr[j]=arr[j],arr[i]
+    arr[i+1],arr[part_ele]=arr[part_ele],arr[i+1]
+    return i+1
+   
+   
+   arr = [10, 7, 8, 9, 1, 5] 
+n = len(arr) 
+Quicksort(arr,0,n-1) 
+print ("Sorted array is:") 
+for i in range(n):
+    print ("%d" %arr[i]), 
